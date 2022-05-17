@@ -1,4 +1,5 @@
 import express from "express"
+import cors from "cors"
 import { Server as HttpServer } from "http"
 import { Server as SocketServer } from 'socket.io'
 
@@ -8,12 +9,13 @@ const app = express()
 const server = new HttpServer(app)
 const io = new SocketServer(server)
 
+app.use(cors())
 app.get('/', (req: any, res: any) => enterMessageRoom(req, res, io))
 
 // this is supposed to be the client side (event bus) sending a message
 import { io as clientIo } from 'socket.io-client'
 app.get('/send-message', (req, res) => {
-    const socketClient = clientIo("ws://localhost:3000")
+    const socketClient = clientIo("http://165.232.89.237:3000/")
     socketClient.emit("message", "this is a new message")
 
     setTimeout(() => {
