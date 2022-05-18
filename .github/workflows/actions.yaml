@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: npm run d-push
+      run: npm run d-push
       uses: appleboy/ssh-action@v0.1.2
       with:
         host: ${{secrets.SSH_HOST}}
