@@ -11,7 +11,7 @@ async function enterMessageRoom(req: any, res: any, io: any) {
     io.on('connection', (socket: any) => {
         socket.on("message", (arg: any, callback: any) => {
             const data = JSON.parse(arg)
-            res.write(`<p style="color: darkblue"><span>${data.name}: </span>${data.message}</p>`)
+            res.write(`<p><span style="color: darkblue">${data.name}: </span>${data.message}</p>`)
             callback(null, 'event emitted')
         })
     })
