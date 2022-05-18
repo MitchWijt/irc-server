@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: npm run d-push
+      - run: docker ps
       - name: Deploy to DO
         uses: appleboy/ssh-action@v0.1.2
         with:
