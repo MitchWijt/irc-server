@@ -8,13 +8,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: docker ps
+      - run: docker build -t mitchelwijt/irc-server .
+      - run: docker push mitchelwijt/irc-server
       - name: Deploy to DO
         uses: appleboy/ssh-action@v0.1.2
         with:
           host: ${{secrets.SSH_HOST}}
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
+          passphrase: ${{secrets.SSH_PASS}}
 
           script: |
             cd irc-server
