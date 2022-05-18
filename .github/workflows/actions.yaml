@@ -1,0 +1,25 @@
+name: Build & Deploy
+on:
+  push:
+    branches: [master]
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm run d-push
+      uses: appleboy/ssh-action@v0.1.2
+      with:
+        host: ${{secrets.SSH_HOST}}
+        key: ${{secrets.SSH_KEY}}
+        username: ${{secrets.SSH_USERNAME}}
+
+        script: |
+          cd irc-server
+          docker rm -f irc-server
+          docker pull mitchelwijt/irc-server
+          docker run -dp 3000:3000 --name irc-server mitchelwijt/irc-server
+          echo 'Deployment Successful'
+          
+          
