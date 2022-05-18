@@ -11,6 +11,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "d-push": "docker build -t mitchelwijt/irc-server . && docker push mitchelwijt/irc-server",
     "start": "tsc && node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
